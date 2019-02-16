@@ -3,6 +3,7 @@
       case 'ADD_TODO' :
       return {
          ...state,
+         activeFilter: state.activeFilter==='COMPLETED'?'TODO':state.activeFilter,
          todos : [
            {
             'id': state.todos.length, 

@@ -10,32 +10,25 @@ import {Provider} from 'react-redux';
 
 
 let storeTodos={
-    
+    activeFilter: 'ALL',
     todos:[
-
-    { 
-      id:0, 
-      todo: 'Fare la spesa',
-      completed: false
-      },
-      {
-        id:1,
-        todo: 'Fare i compiti', 
-        completed: true
-      },
-      {
-        id:2, 
-        todo: 'Imparare React', 
-        completed: false
-      }
-
-  ]
+   ]
 };
-  
+
+  if(localStorage.getItem('mytodolist')) {
+    const currState = JSON.parse(localStorage.getItem('mytodolist'));
+    if(currState) {
+      storeTodos = currState;
+    }
+  }
   
   const store = createStore(storeReducer, { ...storeTodos},
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() );
-  store.subscribe(()=>{console.log(store.getState())})
+  store.subscribe(()=>{
+    const currState = JSON.stringify(store.getState());
+    localStorage.setItem('mytodolist', currState);
+    console.log(store.getState())
+  })
 
 ReactDOM.render(<Provider store={store}><App/></Provider>
     , document.getElementById('root'));
