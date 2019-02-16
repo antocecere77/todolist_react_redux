@@ -33,7 +33,7 @@ let storeTodos={
 };
   
   
-  const store = createStore(storeReducer, { todos: [...storeTodos.todos] },
+  const store = createStore(storeReducer, { ...storeTodos},
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() );
   store.subscribe(()=>{console.log(store.getState())})
 

@@ -2,7 +2,10 @@ export const addTodo = (todo) => {
    
   return  {
        type: 'ADD_TODO',
-       todo
+       payload: {
+         text: todo,
+         completed: false
+        }
 
    };
 };
@@ -15,3 +18,19 @@ export const  removeTodo = (i) => {
 
   };
 };
+
+export const  toggleTodo = (i) => {
+ 
+  return {
+       type: 'TOGGLE_TODO',
+       id : i
+ 
+   };
+ };
+
+ export const filterTodo = (filter= 'ALL') => {
+   return {
+     type: 'SET_FILTER',
+     activeFilter: filter
+   }
+ }
