@@ -7,7 +7,7 @@
     },
     {
       "todo": "Imparare React",
-      "completed": false,
+      "completed": true,
       "id": 1
     },
     {
@@ -15,5 +15,8 @@
       "completed": false,
       "id": 3
     }
-  ]
+  ],
+  "activeFilter": {
+    "filter": "ALL"
+  }
 }

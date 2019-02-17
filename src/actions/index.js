@@ -1,12 +1,22 @@
+import axios from 'axios';
+import { APIURL, APIFILTERURL } from '../config/config';
+
+export const getTodos = () => {
+  return {
+    type: 'TODOS',
+    payload: axios.get(APIURL)
+  }
+}
+
 export const addTodo = (todo) => {
    
   return  {
        type: 'ADD_TODO',
-       payload: {
-         text: todo,
-         completed: false
-        }
-
+       payload: axios.post(APIURL, 
+        {
+          todo: todo,
+          completed: false
+       })
    };
 };
 
@@ -19,18 +29,23 @@ export const  removeTodo = (i) => {
   };
 };
 
-export const  toggleTodo = (i) => {
+export const  toggleTodo = (i, value) => {
  
   return {
        type: 'TOGGLE_TODO',
-       id : i
- 
+       payload: axios.patch(APIURL + '/' + i,
+       {
+         completed: value
+       })
+       
    };
  };
 
  export const filterTodo = (filter= 'ALL') => {
    return {
      type: 'SET_FILTER',
-     activeFilter: filter
+     payload: axios.post(APIFILTERURL, {
+       filter
+     })
    }
  }

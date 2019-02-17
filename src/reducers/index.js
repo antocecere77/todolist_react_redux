@@ -1,15 +1,11 @@
  export default  function storeReducer(state = {}, action) {
     switch(action.type){
-      case 'ADD_TODO' :
+      case 'ADD_TODO_FULFILLED' :
       return {
          ...state,
          activeFilter: state.activeFilter==='COMPLETED'?'TODO':state.activeFilter,
          todos : [
-           {
-            'id': state.todos.length, 
-            'todo': action.payload.text,
-            'completed': action.payload.completed
-           },
+           action.payload.data,
            ...state.todos
          ]
       }
@@ -21,25 +17,28 @@
          ...state.todos.slice( action.id + 1)
        ]
       }
-      case 'TOGGLE_TODO':
+      case 'TOGGLE_TODO_FULFILLED':
         return {
           ...state,
           todos: state.todos.map((todo) => {
-            if(todo.id !== action.id) {
+            if(todo.id !== action.payload.data.id) {
               return todo;
             } else {
-              return {
-                ...todo,
-                completed: !todo.completed
-              }
+              return action.payload.data;
             }
           })
         }
-      case 'SET_FILTER':
+      case 'SET_FILTER_FULFILLED':
         return {
           ...state,
-          activeFilter: action.activeFilter
+          activeFilter: action.payload.data.filter
         }
+
+      case 'TODOS_FULFILLED':
+        return {
+          ...state,
+          todos:action.payload.data
+        }  
       default: 
       return  {...state};
  

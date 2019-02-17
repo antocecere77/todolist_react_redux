@@ -8,6 +8,7 @@ import {applyMiddleware, createStore, compose} from 'redux';
 import storeReducer from './reducers/index';
 import {Provider} from 'react-redux';
 import logger from 'redux-logger';
+import promise from 'redux-promise-middleware';
 
 
 let storeTodos={
@@ -46,12 +47,17 @@ if(localStorage.getItem('mytodolist')) {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   
-
-
 const store = createStore(storeReducer, { ...storeTodos},
-  composeEnhancers(applyMiddleware(logger))
+  composeEnhancers(applyMiddleware(logger, promise))
   //, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() 
   );
+
+// store.dispatch(
+//   {
+//     type:'TODOS',
+//     payload: axios.get('http://localhost:3004/todos')
+//   }
+// )
 
 store.subscribe(()=>{
   const currState = JSON.stringify(store.getState());

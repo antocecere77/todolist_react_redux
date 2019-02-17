@@ -1,0 +1,1 @@
+json-server --watch db.json --no-cors --port 3004
