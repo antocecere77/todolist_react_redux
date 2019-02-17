@@ -1,0 +1,19 @@
+{
+  "todos": [
+    {
+      "id": 0,
+      "todo": "Fare la spesa",
+      "completed": false
+    },
+    {
+      "todo": "Imparare React",
+      "completed": false,
+      "id": 1
+    },
+    {
+      "todo": "Imparare Git",
+      "completed": false,
+      "id": 3
+    }
+  ]
+}
